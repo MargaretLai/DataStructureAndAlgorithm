@@ -11,7 +11,7 @@
 
 代碼：
 ‘’‘
-sub_length = float('inf')
+        sub_length = float('inf')
         left = 0
         curr_sum = 0
 
