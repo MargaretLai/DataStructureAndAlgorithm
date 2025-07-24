@@ -10,7 +10,7 @@
 ### 注意left的移動不可以用if，而是要用while，才能得出最短的sub array。
 
 代碼：
-‘’‘
+```
         sub_length = float('inf')
         left = 0
         curr_sum = 0
@@ -28,7 +28,7 @@
             return sub_length
         else:
             return 0
-'''
+```
 
 # 第二題
 # 第三題
