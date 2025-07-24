@@ -71,5 +71,38 @@ class Solution:
         return nums
 ```
 
-# 第三題
+# 前綴和 （Prefix Sum）：先用一個array把相應元素相加的和裝起來
+## 涉及计算区间和的问题时非常有用！
+Given an integer array nums, handle multiple queries of the following type:
+
+Calculate the sum of the elements of nums between indices left and right inclusive where left <= right.
+Implement the NumArray class:
+
+NumArray(int[] nums) Initializes the object with the integer array nums.
+int sumRange(int left, int right) Returns the sum of the elements of nums between indices left and right inclusive (i.e. nums[left] + nums[left + 1] + ... + nums[right]).
+
+```
+class NumArray:
+
+    def __init__(self, nums: List[int]):
+        self.num_sum = [0] * len(nums)
+        curr_total = 0
+
+        for i in range(len(nums)):
+            curr_total += nums[i]
+            self.num_sum[i] = curr_total
+
+    def sumRange(self, left: int, right: int) -> int:
+        if left != 0:
+            return self.num_sum[right] - self.num_sum[left - 1]
+        else:
+            return self.num_sum[right]
+
+
+# Your NumArray object will be instantiated and called as such:
+# obj = NumArray(nums)
+# param_1 = obj.sumRange(left,right)
+
+```
+
 # 第四題
