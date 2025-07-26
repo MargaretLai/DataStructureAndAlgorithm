@@ -1,13 +1,13 @@
-### 鏈表 Linked List
+# 鏈表 Linked List
 這是第三天，開始練習鏈表相關題目。
 
-### Basic Knowledge
+# Basic Knowledge
 鏈表分為單鏈表，雙鏈表，循環鏈表（最後一個node指向頭部，用於解決約瑟夫環問題）。  
 鏈表的儲存不是連續的，和數組不同（所以有指針）。  
 鏈表的增加和刪除都是O（1），通過操作指針執行。  
 鏈表中查詢元素是O（N），因為要一個個遍歷直到找到元素為止；但數組是O（1），通過計算下標就可以得出。  
 
-### 鏈表的定義
+# 鏈表的定義
 面試題不總是把定義給出來，有時候要自己寫，以下是Python的定義代碼：
 ```
 class ListNode:
@@ -16,7 +16,7 @@ class ListNode:
         self.next = next
 ```
 
-### 移除鏈表元素
+# 移除鏈表元素
 Leetcode #203
 給定一個值target，刪除鏈表中數值和target相同的元素。做法如下
   - 直接在鏈表上操作：如果第一個node就要刪，需要額外代碼專門處理
@@ -44,7 +44,7 @@ class Solution:
         return dummy.next
 ```
 
-### 設計鏈表
+# 設計鏈表
 LeetCode #707
 寫出鏈表的藉口，覆蓋所有常規的鏈表操作。分單鏈表，雙鏈表有不同。
 ### 記得要handle size的增加和減小。以及index out of bound的問題。
@@ -201,5 +201,31 @@ class MyLinkedList:
         self.size -= 1
 ```
 
-### 翻轉鏈表
+# 翻轉鏈表
+這道題非常常見，有雙指針和遞歸兩種寫法。但是要先掌握雙指針才能寫出遞歸。  
+雙指針的中心思想是把節點之間的連結方向調轉過來。一個是Current，一個是pre；pre是用來儲存調轉後指向的節點的。
+```
+class Solution:
+    def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        pre = None
+        current = head
 
+        while current:
+            temp = current.next
+            current.next = pre
+            pre = current
+            current = temp
+        
+        return pre
+```
+遞歸與雙指針的思想一樣。但是注意主function裡面pass頭節點和null，helper裡面遞歸方程pass的是temp和current（這是把遞歸中把雙指針向右移的方法）。
+```
+def reverseList(self, head: ListNode) -> ListNode:
+        return self.reverse(head, None)
+    def reverse(self, cur: ListNode, pre: ListNode) -> ListNode:
+        if cur == None:
+            return pre
+        temp = cur.next
+        cur.next = pre
+        return self.reverse(temp, cur)
+```
