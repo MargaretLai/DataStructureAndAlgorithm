@@ -102,7 +102,7 @@ class MyLinkedList:
         self.size -= 1
 
 ```
-雙鏈表：
+雙鏈表：注意head和tail指針的更新，以及找到第n個元素的巧妙方法（不一定都要從頭開始）。
 ```
 class ListNode:
     def __init__(self, val=0, prev=None, next=None):
