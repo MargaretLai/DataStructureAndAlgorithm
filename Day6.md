@@ -46,7 +46,77 @@ class Solution:
 ```
 
 # 兩個數組的交集
+LeetCode： #349
+給兩個數組，return兩個數組的交集。注意交集裡面的元素不可以重複。題目著重介紹說return的元素不可以重複，可以是任意order，很明顯就提示用set了。Python裡面可以一行搞定：
+```
+    return list(set(nums1) & set(nums2))
+```
 
+或者可以用dictionary去哈希：
+### 注意在找到重複元素之後，直接用del num_dict[num]來刪除字典裡面該元素的存在，避免重複添加。  
+### 有空也去看看Python裡面defaul1dict的各種接口，以及和別的方法的區別。
+```
+from collections import defaultdict
+
+class Solution:
+    def intersection(self, nums1: List[int], nums2: List[int]) -> List[int]:
+        num_dict = defaultdict(int)
+        for num in nums1:
+            num_dict[num] += 1
+        
+        result = set()
+        for num in nums2:
+            if num in num_dict:
+                result.add(num)
+                del num_dict[num]
+        
+        return list(result)
+```
 # 快樂數
+LeetCode： #202
+A happy number is a number defined by the following process:  
+
+Starting with any positive integer, replace the number by the sum of the squares of its digits.  
+Repeat the process until the number equals 1 (where it will stay), or it loops endlessly in a cycle which does not include 1.  
+Those numbers for which this process ends in 1 are happy.  
+Return true if n is a happy number, and false if not.  
+
+Example 1:  
+Input: n = 19  
+Output: true  
+Explanation:  
+12 + 92 = 82  
+82 + 22 = 68  
+62 + 82 = 100  
+12 + 02 + 02 = 1  
+
+Example 2:  
+Input: n = 2  
+Output: false  
+```
+class Solution:
+    def get_sum(self, n:int) -> int:
+        num_str = str(n)
+        result = 0
+        for c in num_str:
+            result += int(c) ** 2
+        return result
+
+    def isHappy(self, n: int) -> bool:
+        loop = set()
+
+        while True:
+            sum = self.get_sum(n)
+
+            if sum == 1:
+                return True
+            else:
+                if sum in loop:
+                    return False
+                else:
+                    loop.add(sum)
+            
+            n = sum
+```
 
 # 兩數之和
