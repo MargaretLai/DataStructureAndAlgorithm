@@ -120,3 +120,36 @@ class Solution:
 ```
 
 # 兩數之和
+当我们需要查询一个元素是否出现过，或者一个元素是否在集合里的时候，就要第一时间想到哈希法。
+本题其实有四个重点：  
+- 为什么会想到用哈希表: 因為是要找某個元素是否在集合裡出現過。
+- 哈希表为什么用map： 因為需要返回index而不是element，所以存的時候會存element，index的pair
+- 本题map是用来存什么的： 存已經出現過的元素及其index
+- map中的key和value用来存什么的：key元素，value存index
+
+Dictionary:
+```
+from collections import defaultdict
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        dictionary = defaultdict()
+        
+        for i in range(len(nums)):
+            target_element = target - nums[i]
+            if target_element in dictionary:
+                return [i, dictionary[target_element]]
+            else:
+                dictionary[nums[i]] = i
+```
+
+Set:
+### 注意用set的話沒辦法存index，想要得到index要用nums.index(target_element)
+```
+        # Set
+        s = set()
+        for i, num in enumerate(nums):
+            target_element = target - num
+            if target_element in s:
+                return [i, nums.index(target_element)]
+            s.add(num)
+```
