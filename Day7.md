@@ -29,7 +29,41 @@ class Solution:
 ```
 
 # 三數之和
+## 這題有難度！需要常回來看看把邏輯內化，並且徹底理解去重的部分
+影片連結：https://www.bilibili.com/video/BV1GW4y127qo?vd_source=62df5c7978d71a59d5d722c00b22afeb&spm_id_from=333.788.videopod.sections 
+```
+class Solution:
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
+        result = []
+        nums.sort()
 
+        for i in range(len(nums)):
+            if nums[i] > 0:
+                return result
+            
+            if i > 0 and nums[i] == nums[i - 1]:
+                continue
+
+            left = i + 1
+            right = len(nums) - 1
+
+            while right > left:
+                if nums[i] + nums[left] + nums[right] == 0:
+                    result.append([nums[i], nums[left], nums[right]])
+                    while right > left and nums[right] == nums[right - 1]:
+                        right -= 1
+                    while right > left and nums[left] == nums[left + 1]:
+                        left += 1
+                    left += 1
+                    right -= 1
+                elif nums[i] + nums[left] + nums[right] < 0:
+                    left += 1
+                else: 
+                    right -= 1
+
+        
+        return result
+```
 # 贖金信： 暫時不看。為拓展題，二刷在看。
 
 # 四數之和
