@@ -18,4 +18,10 @@ list2 = list(map(add_five, list1))
 end=“”，連續打印；
 end=“ ”，空格；
 
-  
+## 打印n位小數
+```
+number = 3.1415926
+# {}是一个占位符，输出结果时会将format()参数里的内容替换在{}中，:.2f 表示保留两位小数
+formatted_number = "{:.2f}".format(number)
+print(formatted_number)
+```
