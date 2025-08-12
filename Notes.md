@@ -35,4 +35,9 @@ char = "a"
 new_char = chr(ord(char) - 32)
 print(new_char)     "A"
 ```
+- separator.join(iterable)
+```
+arr = ["Hello", "World"]
+str = " ".join(arr)    "Hello World"
+```
 
