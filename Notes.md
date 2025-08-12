@@ -25,3 +25,14 @@ number = 3.1415926
 formatted_number = "{:.2f}".format(number)
 print(formatted_number)
 ```
+## string in Python
+- islower()/isupper()
+- upper()/lower()
+- ord() 注意在Unicode表裡大寫字母們在小寫字母們的前面，而且他們之間（A和a）的差值是32
+- chr()
+```
+char = "a"
+new_char = chr(ord(char) - 32)
+print(new_char)     "A"
+```
+
