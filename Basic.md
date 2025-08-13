@@ -81,45 +81,113 @@ class LinkedList:
 這兩個都需要考慮n和m的值valid與否，然後再看n和m等於1（head node）的情況，然後再用current node和while loop的情況去寫。 
 # 注意無論是刪除還是增加，current node都應該停留在n-1或者m-1
 ```
-def insert_at_nth(self, n, value):
+    def insert_at_nth(self, n, value):
         if n < 1 or n > self.length + 1:
-            print("Insert position out of bounds.")
             return
 
         new_node = Node(value)
+        self.length += 1
 
-        # 插入到头节点
         if n == 1:
             new_node.next = self.head
             self.head = new_node
         else:
             current_node = self.head
             count = 1
-            while count != n - 1:
+            while count != n -1:
                 current_node = current_node.next
                 count += 1
             new_node.next = current_node.next
             current_node.next = new_node
-
-        self.length += 1
+        
+        return
 ```
 ```
     def delete_at_mth(self, m):
         if m < 1 or m > self.length:
-            print("Delete position out of bounds.")
             return
+        
+        self.length -= 1
 
-        # 删除头节点
         if m == 1:
             self.head = self.head.next
         else:
-            current_node = self.head
             count = 1
+            current_node = self.head
             while count != m - 1:
                 current_node = current_node.next
                 count += 1
             current_node.next = current_node.next.next
-
-        self.length -= 1
+        
+        return
 ```
-## 
+## 哈希表
+### 快速找到一個元素是否存在於序列中
+### 使用哈希表，有三種數據結構：數組/集合/映射  
+
+### array as hash table
+最經典的哈希表是以下這題（結合chr，ord來左，還帶有處理字母的一個小技巧）：
+给定一个只包含小写字母的字符串，统计字符串中每个字母出现的频率，并找出出现频率最高的字母，如果最高频率的字母有多个，输出字典序靠前的那个字母。
+```
+num_of_input = int(input())
+
+for _ in range(num_of_input):
+    ip = input()
+    arr = [0] * 26
+
+    for char in ip:
+        idx = ord(char) - ord("a")
+        arr[idx] += 1
+    
+    max_frequency = -1
+    max_idx = -1
+    for i in range(len(arr)):
+        if arr[i] > max_frequency:
+            max_frequency = arr[i]
+            max_idx = i
+    
+    result = chr(ord("a") + max_idx)
+    print(result)
+```
+### set as hash table
+集合set最常的用途是：
+- 快速判斷一個元素是否在集合裡
+- 去除集合裡重複的元素
+
+常見set集合的method：
+add(), remove()/discard(), len(), clear()  
+s = set() / s = {}
+if element in s:    # in is the most common used method
+
+### map as hash table
+map本身就是一個哈希表（把key想成index，value想成存放的值）
+Python裡面一些關於map的語法：
+- m = {}
+- for key, value in m.items():
+- m[key_name] = value
+- if key in m:
+- if value in m.values():
+- 注意一個拆包技巧：map返回一個iterable，如果套list（）就變成list，但是也可以直接就把它拆掉變成key door pair
+```
+key, door = map(int, input().split())  
+```
+## 棧 Stack
+stack在python裡面可以用list來實現。只不過注意pop（）
+```
+stack = []  # 创建一个空栈
+
+# 入栈
+stack.append(1)
+stack.append(2)
+stack.append(3)
+
+# 出栈
+top_element = stack.pop()  # 弹出并返回栈顶元素
+print(top_element)  # 输出 3
+
+# 判断栈是否为空
+if not stack:
+```
+### Stack: Fist In, Last Out
+
+## Queue 隊列
