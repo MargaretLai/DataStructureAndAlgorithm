@@ -41,3 +41,84 @@ arr = ["Hello", "World"]
 str = " ".join(arr)    "Hello World"
 ```
 
+## Singly LinkedList Construction
+需要一個class Node和class LinkedList。class Node需要有value和next，class LinkedList需要有length和head。code如下：
+```
+class Node:
+    def __init__(self, value):
+        self.value = value
+        self.next = None
+
+class LinkedList:
+    def __init__(self):
+        self.length = 0
+        self.head = None
+    
+    def append(self, value):
+        self.length += 1
+        new_node = Node(value)
+
+        if self.head is None:
+            self.head = new_node
+        else:
+            current_node = self.head
+            while current_node.next is not None:
+                current_node = current_node.next
+            current_node.next = new_node
+    
+    def print_ll(self):
+        if self.head is None:
+            return
+        else:
+            current_node = self.head
+            while current_node is not None:
+                print(current_node.value, end=" ")
+                current_node = current_node.next
+            return
+```
+
+## Linked List: Insert at nth + Delete at mth
+這兩個都需要考慮n和m的值valid與否，然後再看n和m等於1（head node）的情況，然後再用current node和while loop的情況去寫。 
+```
+def insert_at_nth(self, n, value):
+        if n < 1 or n > self.length + 1:
+            print("Insert position out of bounds.")
+            return
+
+        new_node = Node(value)
+
+        # 插入到头节点
+        if n == 1:
+            new_node.next = self.head
+            self.head = new_node
+        else:
+            current_node = self.head
+            count = 1
+            while count != n - 1:
+                current_node = current_node.next
+                count += 1
+            new_node.next = current_node.next
+            current_node.next = new_node
+
+        self.length += 1
+```
+```
+    def delete_at_mth(self, m):
+        if m < 1 or m > self.length:
+            print("Delete position out of bounds.")
+            return
+
+        # 删除头节点
+        if m == 1:
+            self.head = self.head.next
+        else:
+            current_node = self.head
+            count = 1
+            while count != m - 1:
+                current_node = current_node.next
+                count += 1
+            current_node.next = current_node.next.next
+
+        self.length -= 1
+```
+## 
