@@ -79,6 +79,7 @@ class LinkedList:
 
 ## Linked List: Insert at nth + Delete at mth
 這兩個都需要考慮n和m的值valid與否，然後再看n和m等於1（head node）的情況，然後再用current node和while loop的情況去寫。 
+# 注意無論是刪除還是增加，current node都應該停留在n-1或者m-1
 ```
 def insert_at_nth(self, n, value):
         if n < 1 or n > self.length + 1:
